@@ -1,0 +1,57 @@
+<!-- custom_addons/agenda/views/teacher_views.xml -->
+<odoo>
+    <data>
+        <!-- Vista de lista para Maestros -->
+        <record id="view_school_teacher_tree" model="ir.ui.view">
+            <field name="name">school.teacher.list</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <list string="Maestros">
+                    <field name="name"/>
+                    <field name="user_id" string="Usuario" readonly="1"/>
+                    <field name="course_ids" widget="many2many_tags" string="Cursos"/>
+                    <field name="subject_ids" widget="many2many_tags" string="Materias"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_school_teacher_form" model="ir.ui.view">
+            <field name="name">school.teacher.form</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <form string="Maestro">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="user_id" string="Usuario" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="subject_ids" widget="many2many_tags" string="Materias"/>
+                            <field name="course_ids" widget="many2many_tags" string="Cursos"/>
+                        </group>
+                        <notebook>
+                            <page string="Tareas">
+                                <field name="task_ids">
+                                    <list string="Tareas Asignadas">
+                                        <field name="name"/> <!-- Task title from school.task -->
+                                        <field name="due_date"/> <!-- Task due_date from school.task -->
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Entregas de Tareas">
+                                <field name="task_submission_ids">
+                                    <list string="Entregas">
+                                        <field name="task_id" string="Tarea"/>
+                                        <field name="student_id" string="Estudiante"/>
+                                        <field name="submission_date" string="Fecha de Entrega"/>
+                                        <field name="grade" string="Calificación"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

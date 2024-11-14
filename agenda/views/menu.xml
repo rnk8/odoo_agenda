@@ -1,0 +1,145 @@
+<!-- custom_addons/agenda/views/menu.xml -->
+<odoo>
+    <data>
+        <!-- Acción para Cursos -->
+        <record id="action_school_course" model="ir.actions.act_window">
+            <field name="name">Cursos</field>
+            <field name="res_model">school.course</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p>
+                    Gestiona los cursos disponibles en la institución.
+                </p>
+            </field>
+        </record>
+                
+        <!-- Acción para Periodos Académicos -->
+        <record id="action_school_academic_term" model="ir.actions.act_window">
+            <field name="name">Periodos Académicos</field>
+            <field name="res_model">school.academic.term</field>
+            <field name="view_mode">calendar,list,form</field>
+        </record>
+        <!-- Acción de Ventana para Tareas -->
+        <record id="action_school_task" model="ir.actions.act_window">
+            <field name="name">Tareas</field>
+            <field name="res_model">school.task</field>
+            <field name="view_mode">kanban,list,form,calendar</field>
+            <field name="search_view_id" ref="view_school_task_search"/>
+            <field name="view_ids" eval="[(5, 0, 0),
+                                        (0, 0, {'view_mode': 'list', 'view_id': ref('view_school_task_tree')}),
+                                        (0, 0, {'view_mode': 'form', 'view_id': ref('view_school_task_form')}),
+                                        (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_school_task_kanban')}),
+                                        (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_school_task_calendar')})]"/>
+        </record>
+        <!-- Acciones de Ventana -->
+        <!-- Acción de Ventana para Entregas de Tareas -->
+        <record id="action_school_task_submission" model="ir.actions.act_window">
+            <field name="name">Entregas de Tareas</field>
+            <field name="res_model">school.task.submission</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_id" ref="view_school_task_submission_tree"/>
+        </record>
+        <!-- Acción para visualizar Maestros -->
+        <record id="action_school_teacher" model="ir.actions.act_window">
+            <field name="name">Maestros</field>
+            <field name="res_model">school.teacher</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Acción para Estudiantes -->
+        <record id="action_school_student" model="ir.actions.act_window">
+            <field name="name">Estudiantes</field>
+            <field name="res_model">school.student</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_school_student_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    ¡No hay estudiantes!
+                </p>
+                <p>
+                    Usa este menú para crear y gestionar los estudiantes.
+                </p>
+            </field>
+        </record>
+
+        <!-- Acción para Padres -->
+        <record id="action_school_parent" model="ir.actions.act_window">
+            <field name="name">Padres</field>
+            <field name="res_model">school.parent</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Acción para Materias -->
+        <record id="action_school_subject" model="ir.actions.act_window">
+            <field name="name">Materias</field>
+            <field name="res_model">school.subject</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="action_teacher_tasks" model="ir.actions.act_window">
+            <field name="name">Tareas de Maestros</field>
+            <field name="res_model">school.task</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p>Gestiona las tareas asignadas por los maestros.</p>
+            </field>
+        </record>
+        
+        <!-- Acción para Padres - Entregas de sus Hijos -->
+        <record id="action_parent_submissions" model="ir.actions.act_window">
+            <field name="name">Entregas de Mis Hijos</field>
+            <field name="res_model">school.task.submission</field>
+            <field name="view_mode">list,calendar,kanban</field>
+        </record>
+
+        <!-- Acción para Comunicaciones -->
+        <record id="action_school_communication" model="ir.actions.act_window">
+            <field name="name">Comunicados del Colegio</field>
+            <field name="res_model">school.communication</field>
+            <field name="view_mode">kanban,list,form,calendar</field>
+            <field name="search_view_id" ref="view_school_communication_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    ¡No hay comunicados!
+                </p>
+                <p>
+                    Usa este menú para crear y gestionar los comunicados de la administración.
+                </p>
+            </field>
+        </record>
+
+        <!-- Acción para Comunicados Accesibles por Maestros, Estudiantes y Padres -->
+        <record id="action_school_communication_portal" model="ir.actions.act_window">
+            <field name="name">Comunicados</field>
+            <field name="res_model">school.communication</field>
+            <field name="view_mode">kanban,list,form,calendar</field>
+            <field name="context">{'search_default_recipient_type': 'all'}</field>
+        </record>
+
+        <!-- Menús -->
+        <!-- Menú Raíz -->
+        <menuitem id="menu_school_root" name="Agenda Escolar" sequence="1"/>
+
+        <!-- Menú para Administradores -->
+        <menuitem id="menu_school_admin" name="Administración" parent="menu_school_root" sequence="10" groups="base.group_system"/>
+        <menuitem id="menu_school_admin_teachers" name="Maestros" parent="menu_school_admin" action="action_school_teacher" sequence="12"/>
+        <menuitem id="menu_school_admin_students" name="Estudiantes" parent="menu_school_admin" action="action_school_student" sequence="13"/>
+        <menuitem id="menu_school_admin_parents" name="Padres" parent="menu_school_admin" action="action_school_parent" sequence="14"/>
+        <menuitem id="menu_school_admin_courses" name="Cursos" parent="menu_school_admin" action="action_school_course" sequence="16"/>
+        <menuitem id="menu_school_admin_subject" name="Materias" parent="menu_school_admin" action="action_school_subject" sequence="15"/>
+        <!-- Menú para Administradores -->
+        <menuitem id="menu_school_admin_communication" name="Comunicados" parent="menu_school_admin" action="action_school_communication" sequence="17"/>
+
+        <!-- Menú para Maestros -->
+        <menuitem id="menu_teacher_tasks" name="Crear Tareas" parent="menu_school_root" action="action_teacher_tasks"/>
+        <menuitem id="menu_teacher_submissions" name="Revisar Entregas" parent="menu_school_root" action="action_school_task_submission"/>
+
+        <!-- Menú para Estudiantes -->
+        <menuitem id="menu_student" name="Mis Tareas" parent="menu_school_root" sequence="40" groups="agenda.group_student"/>
+        <menuitem id="menu_student_submissions" name="Mis Entregas" parent="menu_student" action="action_school_task_submission"/>
+
+        <!-- Menú para Padres -->
+        <menuitem id="menu_parent" name="Mis Hijos" parent="menu_school_root" sequence="50" groups="agenda.group_parent"/>
+        <menuitem id="menu_parent_submissions" name="Entregas de Mis Hijos" parent="menu_parent" action="action_parent_submissions"/>
+    </data>
+</odoo>

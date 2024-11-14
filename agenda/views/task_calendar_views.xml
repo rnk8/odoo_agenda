@@ -1,0 +1,43 @@
+<!-- custom_addons/agenda/views/task_calendar_views.xml -->
+
+<odoo>
+    <data>
+        <!-- Vistas de Calendario Adicionales -->
+        <!-- Vista de calendario para Tareas (Maestros) -->
+        <record id="view_school_task_calendar_teacher" model="ir.ui.view">
+            <field name="name">school.task.calendar.teacher</field>
+            <field name="model">school.task</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario de Tareas Asignadas" date_start="due_date">
+                    <field name="name"/>
+                    <field name="course_id"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- Vista de calendario para Entregas de Tareas (Estudiantes) -->
+        <record id="view_school_task_submission_calendar_student" model="ir.ui.view">
+            <field name="name">school.task.submission.calendar.student</field>
+            <field name="model">school.task.submission</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario de Mis Tareas" date_start="due_date">
+                    <field name="task_id"/>
+                    <field name="status"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- Vista de calendario para Comunicaciones -->
+        <record id="view_school_communication_calendar" model="ir.ui.view">
+            <field name="name">school.communication.calendar</field>
+            <field name="model">school.communication</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario de Comunicaciones" date_start="date">
+                    <field name="name"/>
+                    <field name="category_id"/>
+                    <field name="priority"/>
+                </calendar>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+            <!-- Vista de lista para Tareas -->
+            <record id="view_school_task_tree" model="ir.ui.view">
+                <field name="name">school.task.list</field>
+                <field name="model">school.task</field>
+                <field name="arch" type="xml">
+                    <list string="Tareas" decoration-danger="due_date &lt; context_today() and progress &lt; 100">
+                        <field name="name"/>
+                        <field name="teacher_id"/>
+                        <field name="subject_id"/>
+                        <field name="course_id"/>
+                        <field name="due_date"/>
+                        <field name="progress" widget="progressbar" options="{'max_value': 100}"/>
+                    </list>
+                </field>
+            </record>
+
+            <!-- Vista Kanban para Tareas -->
+            <record id="view_school_task_kanban" model="ir.ui.view">
+                <field name="name">school.task.kanban</field>
+                <field name="model">school.task</field>
+                <field name="arch" type="xml">
+                    <kanban default_group_by="category">
+                        <field name="name"/>
+                        <field name="due_date"/>
+                        <field name="subject_id"/>
+                        <field name="course_id"/>
+                        <field name="progress"/>
+                        <templates>
+                            <t t-name="kanban-box">
+                                <div class="oe_kanban_global_click o_kanban_record">
+                                    <div class="o_kanban_header">
+                                        <field name="priority" widget="priority"/>
+                                        <div class="o_kanban_title">
+                                            <strong><field name="name"/></strong>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_body">
+                                        <p><strong>Fecha de Entrega:</strong> <field name="due_date"/></p>
+                                        <p><strong>Curso:</strong> <field name="course_id"/></p>
+                                        <p><strong>Progreso:</strong> <progress max="100" t-att-value="record.progress.raw_value"/></p>
+                                    </div>
+                                </div>
+                            </t>
+                        </templates>
+                    </kanban>
+                </field>
+            </record>
+
+            <!-- Vista de calendario para Tareas -->
+            <record id="view_school_task_calendar" model="ir.ui.view">
+                <field name="name">school.task.calendar</field>
+                <field name="model">school.task</field>
+                <field name="arch" type="xml">
+                    <calendar string="Calendario de Tareas" date_start="due_date" color="category">
+                        <field name="name"/>
+                        <field name="course_id"/>
+                        <field name="subject_id"/>
+                    </calendar>
+                </field>
+            </record>
+
+            <!-- Vista de búsqueda para Tareas -->
+            <record id="view_school_task_search" model="ir.ui.view">
+                <field name="name">school.task.search</field>
+                <field name="model">school.task</field>
+                <field name="arch" type="xml">
+                    <search>
+                        <!-- Campos de Búsqueda -->
+                        <field name="name"/>
+                        <field name="teacher_id"/>
+                        <field name="subject_id"/>
+                        <field name="course_id"/>
+                        <field name="category"/>
+
+                        <!-- Filtros -->
+                        <filter string="Tareas Vencidas"
+                                name="filter_late_tasks"
+                                domain="[('due_date', '&lt;', context_today())]"
+                                help="Tareas con fecha de entrega vencida"/>
+
+                        <!-- Opciones de Agrupamiento -->
+                        <group expand="0" string="Agrupar por">
+                            <filter string="Maestro" name="group_by_teacher"
+                                    context="{'group_by': 'teacher_id'}"/>
+                            <filter string="Materia" name="group_by_subject"
+                                    context="{'group_by': 'subject_id'}"/>
+                            <filter string="Curso" name="group_by_course"
+                                    context="{'group_by': 'course_id'}"/>
+                            <filter string="Categoría" name="group_by_category"
+                                    context="{'group_by': 'category'}"/>
+                        </group>
+                    </search>
+                </field>
+            </record>
+    </data>
+</odoo>

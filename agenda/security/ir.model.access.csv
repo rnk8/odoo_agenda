@@ -1,0 +1,72 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+
+access_school_student_student,school.student student,model_school_student,agenda.group_student,1,0,0,0
+access_school_student_teacher,school.student teacher,model_school_student,agenda.group_teacher,1,1,0,0
+access_school_student_parent,school.student parent,model_school_student,agenda.group_parent,1,0,0,0
+access_school_student_admin,school.student admin,model_school_student,base.group_system,1,1,1,1
+
+
+access_school_teacher_teacher,school.teacher teacher,model_school_teacher,agenda.group_teacher,1,1,1,1
+access_school_teacher_student,school.teacher student,model_school_teacher,agenda.group_student,1,0,0,0
+access_school_teacher_parent,school.teacher parent,model_school_teacher,agenda.group_parent,1,0,0,0
+access_school_teacher_admin,school.teacher admin,model_school_teacher,base.group_system,1,1,1,1
+
+
+access_school_course_teacher,school.course teacher,model_school_course,agenda.group_teacher,1,1,0,0
+access_school_course_student,school.course student,model_school_course,agenda.group_student,1,0,0,0
+access_school_course_parent,school.course parent,model_school_course,agenda.group_parent,1,0,0,0
+access_school_course_admin,school.course admin,model_school_course,base.group_system,1,1,1,1
+
+
+access_school_subject_teacher,school.subject teacher,model_school_subject,agenda.group_teacher,1,1,1,1
+access_school_subject_student,school.subject student,model_school_subject,agenda.group_student,1,0,0,0
+access_school_subject_parent,school.subject parent,model_school_subject,agenda.group_parent,1,0,0,0
+access_school_subject_admin,school.subject admin,model_school_subject,base.group_system,1,1,1,1
+
+
+access_school_parent_admin,school.parent admin,model_school_parent,base.group_system,1,1,1,1
+access_school_parent_parent,school.parent parent,model_school_parent,agenda.group_parent,1,1,0,0
+
+
+access_school_task_teacher,school.task teacher,model_school_task,agenda.group_teacher,1,1,1,1
+access_school_task_student,school.task student,model_school_task,agenda.group_student,1,0,0,0
+access_school_task_parent,school.task parent,model_school_task,agenda.group_parent,1,0,0,0
+access_school_task_admin,school.task admin,model_school_task,base.group_system,1,1,1,1
+
+
+access_school_task_submission_student,school.task.submission student,model_school_task_submission,agenda.group_student,1,1,1,0
+access_school_task_submission_teacher,school.task.submission teacher,model_school_task_submission,agenda.group_teacher,1,1,1,0
+access_school_task_submission_parent,school.task.submission parent,model_school_task_submission,agenda.group_parent,1,0,0,0
+access_school_task_submission_admin,school.task.submission admin,model_school_task_submission,base.group_system,1,1,1,1
+
+
+access_school_communication_admin,school.communication admin,model_school_communication,base.group_system,1,1,1,1
+access_school_communication_teacher,school.communication teacher,model_school_communication,agenda.group_teacher,1,1,1,0
+access_school_communication_student,school.communication student,model_school_communication,agenda.group_student,1,0,0,0
+access_school_communication_parent,school.communication parent,model_school_communication,agenda.group_parent,1,0,0,0
+
+
+access_school_communication_category_admin,school.communication.category admin,model_school_communication_category,base.group_system,1,1,1,1
+
+
+access_school_communication_tag_admin,school.communication.tag admin,model_school_communication_tag,base.group_system,1,1,1,1
+
+
+access_school_communication_attachment_teacher,school.communication.attachment teacher,model_school_communication_attachment,agenda.group_teacher,1,1,1,1
+access_school_communication_attachment_student,school.communication.attachment student,model_school_communication_attachment,agenda.group_student,1,0,0,0
+access_school_communication_attachment_parent,school.communication.attachment parent,model_school_communication_attachment,agenda.group_parent,1,0,0,0
+access_school_communication_attachment_admin,school.communication.attachment admin,model_school_communication_attachment,base.group_system,1,1,1,1
+
+
+access_school_task_rubric_teacher,school.task.rubric teacher,model_school_task_rubric,agenda.group_teacher,1,1,1,1
+access_school_task_rubric_student,school.task.rubric student,model_school_task_rubric,agenda.group_student,1,0,0,0
+access_school_task_rubric_parent,school.task.rubric parent,model_school_task_rubric,agenda.group_parent,1,0,0,0
+access_school_task_rubric_admin,school.task.rubric admin,model_school_task_rubric,base.group_system,1,1,1,1
+
+
+access_school_academic_term_admin,school.academic.term admin,model_school_academic_term,base.group_system,1,1,1,1
+access_school_academic_term_teacher,school.academic.term teacher,model_school_academic_term,agenda.group_teacher,1,0,0,0
+access_school_academic_term_student,school.academic.term student,model_school_academic_term,agenda.group_student,1,0,0,0
+access_school_academic_term_parent,school.academic.term parent,model_school_academic_term,agenda.group_parent,1,0,0,0
+

@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <!-- Vista de lista para Cursos -->
+        <record id="view_school_course_list" model="ir.ui.view">
+            <field name="name">school.course.list</field>
+            <field name="model">school.course</field>
+            <field name="arch" type="xml">
+                <list string="Cursos">
+                    <field name="name"/>
+                    <field name="student_ids" widget="many2many_tags"/>
+                </list>
+                
+            </field>
+        </record>
+
+        <!-- Vista de formulario para Cursos -->
+        <record id="view_school_course_form" model="ir.ui.view">
+            <field name="name">school.course.form</field>
+            <field name="model">school.course</field>
+            <field name="arch" type="xml">
+                <form string="Curso">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="teacher_ids" widget="many2many_tags"/>
+                            <field name="student_ids" widget="many2many_tags"/>
+                            <field name="subject_ids" widget="many2many_tags"/>
+                        </group>
+                        <notebook>
+                            <page string="Tareas">
+                                <field name="task_ids">
+                                    <list editable="top">
+                                        <field name="name"/>
+                                        <field name="due_date"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

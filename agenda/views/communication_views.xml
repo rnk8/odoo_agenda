@@ -1,0 +1,136 @@
+<!-- custom_addons/agenda/views/communication_views.xml -->
+
+<odoo>
+    <data>
+        <!-- Vista de formulario para Comunicaciones -->
+        <record id="view_school_communication_form" model="ir.ui.view">
+            <field name="name">school.communication.form</field>
+            <field name="model">school.communication</field>
+            <field name="arch" type="xml">
+                <form string="Comunicación">
+                    <sheet>
+                        <chatter/>
+                        <group>
+                            <field name="date" readonly="1"/>
+                            <field name="recipient_type"/>
+                            <field name="category_id" widget="many2one"/>
+                            <field name="priority" widget="priority"/>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="message" widget="html" options="{'toolbar': True}"/>
+                        </group>
+                        <group string="Archivos Adjuntos">
+                            <field name="attachment_ids">
+                                <list editable="bottom">
+                                    <field name="filename"/>
+                                    <field name="file" filename="filename" widget="file"/>
+                                </list>
+                            </field>
+                        </group>
+                        <chatter/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de lista para Comunicaciones -->
+        <record id="view_school_communication_list" model="ir.ui.view">
+            <field name="name">school.communication.list</field>
+            <field name="model">school.communication</field>
+            <field name="arch" type="xml">
+                <list string="Comunicaciones" decoration-bf="priority == 'high'">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="recipient_type"/>
+                    <field name="category_id"/>
+                    <field name="priority" widget="priority"/>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Vista Kanban para Comunicaciones -->
+        <record id="view_school_communication_kanban" model="ir.ui.view">
+            <field name="name">school.communication.kanban</field>
+            <field name="model">school.communication</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="category_id">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="recipient_type"/>
+                    <field name="category_id"/>
+                    <field name="priority"/>
+                    <field name="tag_ids"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click o_kanban_record">
+                                <div class="o_kanban_top">
+                                    <div class="o_kanban_record_title">
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                    <div class="o_kanban_tags">
+                                        <field name="tag_ids" widget="many2many_tags"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_primary_bottom">
+                                    <div><strong>Fecha:</strong> <field name="date"/></div>
+                                    <div><strong>Destinatarios:</strong> <field name="recipient_type"/></div>
+                                    <div><strong>Prioridad:</strong> <field name="priority" widget="priority"/></div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Vista de calendario para Comunicaciones -->
+        <record id="view_school_communication_calendar" model="ir.ui.view">
+            <field name="name">school.communication.calendar</field>
+            <field name="model">school.communication</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario de Comunicaciones" date_start="date" color="category_id">
+                    <field name="name"/>
+                    <field name="category_id"/>
+                    <field name="priority"/>
+                </calendar>
+            </field>
+        </record>
+
+            <!-- Vista de búsqueda para Comunicaciones -->
+        <record id="view_school_communication_search" model="ir.ui.view">
+            <field name="name">school.communication.search</field>
+            <field name="model">school.communication</field>
+            <field name="arch" type="xml">
+                <search>
+                    <!-- Search Fields -->
+                    <field name="name"/>
+                    <field name="recipient_type"/>
+                    <field name="category_id"/>
+
+                    <!-- Filters -->
+                    <filter string="High Priority"
+                            name="filter_high_priority"
+                            domain="[('priority', '=', 'high')]"
+                            help="Mostrar solo los comunicados de alta prioridad"/>
+
+                    <!-- Group By Options -->
+                    <group expand="0" string="Agrupar por">
+                        <filter string="Categoría"
+                                name="group_by_category"
+                                context="{'group_by': 'category_id'}"/>
+                        <filter string="Prioridad"
+                                name="group_by_priority"
+                                context="{'group_by': 'priority'}"/>
+                        <filter string="Destinatario"
+                                name="group_by_recipient_type"
+                                context="{'group_by': 'recipient_type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+         
+    </data>
+</odoo>

@@ -1,0 +1,77 @@
+<!-- custom_addons/agenda/views/student_views.xml -->
+
+<odoo>
+    <data>
+        <!-- Vista de lista para Estudiantes -->
+        <record id="view_school_student_tree" model="ir.ui.view">
+            <field name="name">school.student.list</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <list string="Estudiantes">
+                    <field name="name"/>
+                    <field name="course_id"/>
+                    <field name="parent_id"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View for Students -->
+        <record id="view_school_student_form" model="ir.ui.view">
+            <field name="name">school.student.form</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <form string="Estudiante">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="course_id"/>
+                                <field name="parent_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Entregas de Tareas">
+                                <field name="task_submission_ids">
+                                    <list string="Entregas de Tareas">
+                                        <field name="task_id"/>
+                                        <field name="course_id"/>
+                                        <field name="status" widget="statusbar" statusbar_visible="pending,submitted,graded"/>
+                                        <field name="grade"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Información Adicional">
+                                <!-- Add any additional fields here -->
+                            </page>
+                        </notebook>
+                        <chatter/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View for Students -->
+        <record id="view_school_student_search" model="ir.ui.view">
+            <field name="name">school.student.search</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="course_id"/>
+                    <field name="parent_id"/>
+                    <group expand="0" string="Agrupar por">
+                        <filter string="Curso" context="{}" domain="[]" name="group_by_course" />
+                        <filter string="Padre" context="{}" domain="[]" name="group_by_parent" />
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>
